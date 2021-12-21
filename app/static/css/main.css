@@ -1,0 +1,92 @@
+.form {
+    margin: 3rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 40rem;
+    background: darkorange;
+    border-radius: 0.3rem;
+}
+
+.form label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.form input, select {
+    margin-top: 0.3rem;
+    border-radius: 0.3rem;
+    width: 15rem;
+}
+
+.form button {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    margin: 1rem;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 0.3rem;
+}
+
+.form button:hover {
+    border: 1px solid black;
+    background: darkorange;
+}
+
+.footer {
+    max-height: 10%;
+}
+
+.footer p {
+    paddind: 0;
+    margin: 0;
+}
+
+.centered {
+    margin: 5rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    border-radius: 0.3rem;
+    border: 1px solid black;
+    max-width: 40rem;
+}
+
+.centered ul {
+    list-style: none;
+}
+
+.list {
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    margin: 1rem 0;
+    padding: 0.3rem;
+}
+
+.centered label, h1 {
+    padding: 0.5rem 0;
+    font-weight: bold;
+}
+
+.centered input {
+    max-width: 20rem;
+    border-radius: 0.3rem;
+}
+
+.bg-color {
+    background: darkorange;
+}
+
+.centered button {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    margin: 1rem;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 0.3rem;
+}
+

@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% from "_render_field.html" import render_field %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-warning">
+    {{ message }}
+</div>
+{% endfor %}
+
+<form method="POST" action="{{ url_for('doc_registration.form') }}" class="form-control text-center">
+    {{ form.csrf_token }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
+    <button>Submit</button>
+</form>
+{% endblock %}
+
+{% block footer %}
+{% for key, value in user_info.items() %}
+<p>{{ key }} ---> {{ value }}</p>
+{% endfor %}
+{% endblock %}
