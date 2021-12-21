@@ -32,4 +32,7 @@ def create_app(config_name='default'):
         from .doc_registration import doc_registration_blueprint
         app.register_blueprint(doc_registration_blueprint, url_prefix='/doc_registration')
 
+        from .posts import post_blueprint
+        app.register_blueprint(post_blueprint, url_prefix='/post')
+
         return app

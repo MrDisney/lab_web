@@ -1,0 +1,54 @@
+{% from "_render_field.html" import render_field %}
+{% extends 'main.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+
+<div class="container cta-100 ">
+    <div class="container">
+        <div class="row blog">
+            <div class="col-md-12">
+                <div id="blogCarousel" class="carousel slide container-blog" data-ride="carousel">
+
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                {% for post in posts %}
+                                <div class="col-md-4">
+                                    <div class="item-box-blog">
+                                        <div class="item-box-blog-body">
+                                            <!--Heading-->
+                                            <div class="item-box-blog-heading">
+                                                <img src="{{ url_for('static', filename='posts_pics/' + post.image_file) }}" width="300px">
+                                            </div>
+                                            <div class="item-box-blog-heading">
+                                                <a href="{{ url_for('post.view_detail', pk=post.id) }}" tabindex="0">
+                                                    <h5>{{ post.title }}</h5>
+                                                </a>
+                                            </div>
+                                            <!--Data-->
+                                            <div class="item-box-blog-data" style="padding: px 15px;">
+                                                <p><i class="fa fa-user-o"></i> {{ post.text }}, <i class="fa fa-comments-o"></i></p>
+                                                    <p>{{ post.type.value }}</p>
+                                                    <p>Created: {{ post.created }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock %}
