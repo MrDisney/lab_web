@@ -21,7 +21,8 @@
                                         <div class="item-box-blog-body">
                                             <!--Heading-->
                                             <div class="item-box-blog-heading">
-                                                <img src="{{ url_for('static', filename='posts_pics/' + post.image_file) }}" width="300px">
+                                                <img src="{{ url_for('static', filename='posts_pics/' + post.image_file) }}"
+                                                     width="300px">
                                             </div>
                                             <div class="item-box-blog-heading">
                                                 <a href="{{ url_for('post.view_detail', pk=post.id) }}" tabindex="0">
@@ -30,24 +31,27 @@
                                             </div>
                                             <!--Data-->
                                             <div class="item-box-blog-data" style="padding: px 15px;">
-                                                <p><i class="fa fa-user-o"></i> {{ post.text }}, <i class="fa fa-comments-o"></i></p>
-                                                    <p>{{ post.type.value }}</p>
-                                                    <p>Created: {{ post.created }}</p>
+                                                <p><i class="fa fa-user-o"></i> {{ post.text }}, <i
+                                                        class="fa fa-comments-o"></i></p>
+                                                <p>Enabled post {% if post.enabled%} ✔ {% else %} ❌ {% endif %}</p>
+                                                <p>Type: {{ post.type.value }}</p>
+                                                <p>Category: {{ post.category.name }}</p>
+                                                <p>Created: {{ post.created }}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 {% endfor %}
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
 
             </div>
-
         </div>
     </div>
-</div>
 </div>
 </div>
 

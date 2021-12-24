@@ -1,11 +1,10 @@
-
-from .models import Post
+from .models import Post, Category
 from flask import url_for, render_template, flash, redirect, current_app
 from .. import db
 from flask_login import current_user, login_required
 import os
 import secrets
-from .forms import CreatePostForm
+from .forms import CreatePostForm, CategoryForm
 
 from . import post_blueprint
 from PIL import Image
@@ -28,6 +27,7 @@ def view_detail(pk):
 @login_required
 def create():
     form = CreatePostForm()
+    form.category.choices = [(category.id, category.name) for category in Category.query.all()]
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -36,7 +36,7 @@ def create():
             image = 'postdefault.jpg'
 
         post = Post(title=form.title.data, text=form.text.data, type=form.type.data, image_file=image,
-                     post_id=current_user.id)
+                    post_id=current_user.id, enabled=form.enabled.data, category_id=form.category.data)
 
         db.session.add(post)
         db.session.commit()
@@ -80,6 +80,7 @@ def update_post(id):
         return redirect(url_for('post.view_detail', pk=id))
 
     form = CreatePostForm()
+    form.category.choices = [(category.id, category.name) for category in Category.query.all()]
 
     if form.validate_on_submit():
         if form.picture.data:
@@ -89,15 +90,75 @@ def update_post(id):
         get_post.title = form.title.data
         get_post.text = form.text.data
         get_post.type = form.type.data
+        get_post.enabled = form.enabled.data
+        get_post.category_id = form.category.data
 
         db.session.commit()
         db.session.add(get_post)
 
         flash('You post has been update', category='access')
-        return redirect(url_for('post.view_detail', pk=pk))
+        return redirect(url_for('post.view_detail', pk=id))
 
     form.title.data = get_post.title
     form.text.data = get_post.text
     form.type.data = get_post.type
+    form.enabled.data = get_post.enabled
+    form.category.data = get_post.category_id
 
     return render_template('create.html', form=form)
+
+
+@post_blueprint.route('/category', methods=['GET', 'POST'])
+def get_category():
+    category = Category.query.all()
+    return render_template('category.html', category=category)
+
+
+@post_blueprint.route('/category/<pk>', methods=['GET', 'POST'])
+def view_category_post(pk):
+    all_posts = Post.query.filter_by(category_id=pk)
+    return render_template('post.html', posts=all_posts)
+
+
+@post_blueprint.route('/categories', methods=['GET', 'POST'])
+def category_crud():
+    form = CategoryForm()
+
+    if form.validate_on_submit():
+        category = Category(name=form.name.data)
+
+        db.session.add(category)
+        db.session.commit()
+        flash('Категорія добавленна')
+        return redirect(url_for('.category_crud'))
+
+    categories = Category.query.all()
+    return render_template('category_crud.html', categories=categories, form=form)
+
+
+@post_blueprint.route('/update_category/<id>', methods=['GET', 'POST'])
+def update_category(id):
+    category = Category.query.get_or_404(id)
+    form = CategoryForm()
+    if form.validate_on_submit():
+        category.name = form.name.data
+
+        db.session.add(category)
+        db.session.commit()
+        flash('Категорія відредагована')
+        return redirect(url_for('.category_crud'))
+
+    form.name.data = category.name
+    categories = Category.query.all()
+    return render_template('category_crud.html', categories=categories, form=form)
+
+
+@post_blueprint.route('/delete_category/<id>', methods=['GET'])
+@login_required
+def delete_category(id):
+    category = Category.query.get_or_404(id)
+    db.session.delete(category)
+    db.session.commit()
+
+    flash('Category delete', category='access')
+    return redirect(url_for('.category_crud'))
