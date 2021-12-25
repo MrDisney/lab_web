@@ -16,11 +16,27 @@
         "doc_number": "654321"
     },
     "test3@gmail.com": {
-        "password": "йцукен",
+        "password": "Р в„–РЎвЂ РЎС“Р С”Р ВµР Р…",
         "number": "1234567",
         "pin": "4142",
         "year": "2016",
         "serial": "A12",
         "doc_number": "654321"
+    },
+    "testzxc@gmail.com": {
+        "password": "Password",
+        "number": "1234567",
+        "pin": "7601",
+        "year": "2017",
+        "serial": "A12",
+        "doc_number": "414446"
+    },
+    "reddott@mail.com": {
+        "password": "Password",
+        "number": "1234567",
+        "pin": "1234",
+        "year": "2016",
+        "serial": "A12",
+        "doc_number": "123456"
     }
 }

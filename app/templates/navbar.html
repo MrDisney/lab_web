@@ -17,20 +17,29 @@
                     <a class="nav-link" href="{{ url_for('contacts') }}">Contacts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('form') }}">Form</a>
+                    <a class="nav-link" href="{{ url_for('doc_registration.form') }}">Form</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('doc_registration') }}">Document Registration</a>
+                    <a class="nav-link" href="{{ url_for('doc_registration.doc_registration') }}">Document Registration</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('users') }}">Users List</a>
+                    <a class="nav-link" href="{{ url_for('auth.users') }}">Users List</a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.account') }}">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+                    <a class="nav-link" href="{{ url_for('auth.signup') }}">Sign Up</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>

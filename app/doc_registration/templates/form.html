@@ -8,7 +8,7 @@
 </div>
 {% endfor %}
 
-<form method="POST" action="{{ url_for('form') }}" class="form-control text-center">
+<form method="POST" action="{{ url_for('doc_registration.form') }}" class="form-control text-center">
     {{ form.csrf_token }}
     {{ render_field(form.username) }}
     {{ render_field(form.password) }}
