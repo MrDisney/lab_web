@@ -1,0 +1,14 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+<h1>Contacts</h1>
+{% for key, value in contacts_dict.items() %}
+<p>{{ key }} ---> {{ value }}</p>
+{% endfor %}
+{% endblock %}
+
+{% block footer %}
+{% for key, value in user_info.items() %}
+<p>{{ key }} ---> {{ value }}</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+<div>
+    <h1>Projects</h1>
+    {% for project in projects_list %}
+    <p>{{ project }}</p>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% for key, value in user_info.items() %}
+<p>{{ key }} ---> {{ value }}</p>
+{% endfor %}
+{% endblock %}
