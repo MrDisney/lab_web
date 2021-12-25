@@ -1,0 +1,26 @@
+{
+    "test@gmail.com": {
+        "password": "123123",
+        "number": "7654321",
+        "pin": "1234",
+        "year": "2011",
+        "serial": "AB",
+        "doc_number": "12345678"
+    },
+    "test2@gmail.com": {
+        "password": "123123",
+        "number": "1234567",
+        "pin": "4142",
+        "year": "2016",
+        "serial": "A12",
+        "doc_number": "654321"
+    },
+    "test3@gmail.com": {
+        "password": "йцукен",
+        "number": "1234567",
+        "pin": "4142",
+        "year": "2016",
+        "serial": "A12",
+        "doc_number": "654321"
+    }
+}

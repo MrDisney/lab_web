@@ -1,0 +1,45 @@
+.form {
+    margin: 3rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 40rem;
+    background: darkorange;
+    border-radius: 0.3rem;
+}
+
+.form label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.form input, select {
+    margin-top: 0.3rem;
+    border-radius: 0.3rem;
+    width: 15rem;
+}
+
+.form button {
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    margin: 1rem;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 0.3rem;
+}
+
+.form button:hover {
+    border: 1px solid #a84413;
+    background: #a84413;
+}
+
+.footer {
+    max-height: 10%;
+}
+
+.footer p {
+    paddind: 0;
+    margin: 0;
+}

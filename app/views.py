@@ -1,62 +1,68 @@
-from flask import Flask, render_template, request, flash
-import os, sys, platform
-from datetime import datetime
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
-from wtforms.validators import InputRequired, Length, AnyOf
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'asdAWdfz21zasdasdaw64!'
-
-@app.route("/blog")
-def blog():
-    news_dict = {
-        'Lab1': 'здано',
-        'Lab2': 'здано',
-        'Lab3': 'здано',
-    }
-    return render_template("blog.html", news_dict=news_dict, sys_info=request.headers.get('User-Agent'),
-                           sys=sys.version, os_name=os.name, platform=platform.system(), release=platform.release(),
-                           date=datetime.now())
-
-
-@app.route("/news")
-def sale():
-    sale_dict = {
-        'Це моя ': 'домашня сторінка'
-
-
-    }
-    return render_template("sale.html", sale_dict=sale_dict, sys_info=request.headers.get('User-Agent'),
-                           sys=sys.version, os_name=os.name, platform=platform.system(), release=platform.release(),
-                           date=datetime.now())
+from flask import render_template, session, flash, redirect, url_for
+import json
+from . import app
+from .controller import user_info, validate_fields, json_data
+from .forms import LoginForm, DocRegistration
 
 
 @app.route("/")
-def aboutme():
-    return render_template("aboutme.html", boolean=False, name='Іван', error='Wrong data',
-                           sys_info=request.headers.get('User-Agent'), sys=sys.version, os_name=os.name,
-                           platform=platform.system(), release=platform.release(), date=datetime.now())
+def index():
+    return render_template("index.html", user_info=user_info())
 
 
-# Lab 4
-class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired('A username is required'),
-                                                   Length(min=5, max=10, message='Must be at least 5 and at most 10 '
-                                                                                 'characters')])
-    password = PasswordField('password',
-                             validators=[InputRequired('Password is required'), AnyOf(values=['password', 'secret'])])
+@app.route("/about")
+def about():
+    info = "Павлишин Іван студент групи ІПЗ-31 "
+    checker = True
+    return render_template("about.html", checker=checker, info=info, user_info=user_info())
+
+
+@app.route("/projects")
+def projects():
+    projects_list = ['Lab1', 'Lab2', 'Lab3', 'Lab4', 'Lab5', 'Lab6']
+    return render_template("projects.html", projects_list=projects_list, user_info=user_info())
+
+
+@app.route("/contacts")
+def contacts():
+    contact_dict = {
+        'Номер телефону': '380956398000',
+        'Електронна пошта': 'email@gmail.com',
+        'Телеграм': '@paveldurov'
+    }
+    return render_template("contacts.html", contacts_dict=contact_dict, user_info=user_info())
 
 
 @app.route("/form", methods=['GET', 'POST'])
 def form():
     form = LoginForm()
-    flash('Пароль повинен бути скритий')
+
+    flash('Значення пароль повинно бути секретне')
     if form.validate_on_submit():
-        return f'The username is {form.username.data}. The password is {form.password.data}'
+        return f'<h1>The username is {form.username.data}. The password is {form.password.data}</h1>'
+    return render_template('form.html', form=form, user_info=user_info())
 
-    return render_template('form.html', form=form)
 
+@app.route("/doc_registration", methods=['GET', 'POST'])
+def doc_registration():
+    doc_reg = DocRegistration()
+    validate_fields(doc_reg)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    if doc_reg.validate_on_submit():
+        session['email'] = doc_reg.email.data
+        json_data(doc_reg)
+        flash('Data successfully added to json')
+        return redirect(url_for('doc_registration'))
+
+    try:
+        session_data = session['email']
+    except KeyError:
+        return render_template('doc_registration.html', doc_reg=doc_reg)
+
+    with open('data.json') as file:
+        data = json.load(file)
+
+    return render_template('doc_registration.html', doc_reg=doc_reg, email=session_data,
+                           number=data[session_data]['number'], pin=data[session_data]['pin'],
+                           year=data[session_data]['year'], serial=data[session_data]['serial'],
+                           doc_number=data[session_data]['doc_number'])

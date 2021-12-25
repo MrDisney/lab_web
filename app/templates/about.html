@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>About</title>
+{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Тут розташована коротка інформація про мене </h1>
+    {% if checker %}
+    {{ info }}
+    {% else %}
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, harum id modi nihil nobis officia. Amet, animi blanditiis dolores eos minima nemo nihil possimus, quis quisquam sequi temporibus unde veritatis?</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block footer %}
+{% for key, value in user_info.items() %}
+<p>{{ key }} ---> {{ value }}</p>
+{% endfor %}
+{% endblock %}
