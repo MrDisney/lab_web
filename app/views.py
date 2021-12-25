@@ -30,7 +30,7 @@ def projects():
 def contacts():
     contact_dict = {
         'Номер телефону': '380956398000',
-        'Електронна пошта': 'email@gmail.com',
+        'Електонна пошта': 'email@gmail.com',
         'Телеграм': '@paveldurov'
     }
     return render_template("contacts.html", contacts_dict=contact_dict, user_info=user_info())
@@ -40,7 +40,7 @@ def contacts():
 def form():
     form = Form()
 
-    flash('Пароль повинен бути сикретним')
+    flash('Паоль повинен бути сикретним')
     if form.validate_on_submit():
         return f'<h1>The username is {form.username.data}. The password is {form.password.data}</h1>'
     return render_template('form.html', form=form, user_info=user_info())
@@ -54,7 +54,7 @@ def doc_registration():
     if doc_reg.validate_on_submit():
         session['email'] = doc_reg.email.data
         json_data(doc_reg)
-        # flash('Data successfully added to json')
+        flash('Data successfully added to json')
         return redirect(url_for('doc_registration'))
 
     try:

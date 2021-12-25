@@ -26,13 +26,13 @@
     font-weight: bold;
     margin: 1rem;
     border: 1px solid black;
-    background: darkorange;
+    background: yellowgreen;
     border-radius: 0.3rem;
 }
 
 .form button:hover {
     border: 1px solid black;
-    background: yellowgreen;
+    background: darkorange;
 }
 
 .footer {
