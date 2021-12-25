@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% from "_render_field.html" import render_field %}
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="text-center">Form(Test reg)</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="container">
+                                {% for category, message in messages %}
+                                    <div class="alert alert-primary" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+    {% endwith %}
+    <p></p>
+    <form method="POST" action="{{ url_for('form') }}">
+        {{ form.csrf_token }}
+
+        {{ render_field(form.username) }}
+
+        {{ render_field(form.password) }}
+
+        <input type="submit" value="Sumbit">
+    </form>
+{% endblock %}
