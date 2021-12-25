@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% from "_render_field.html" import render_field %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<form class="centered bg-color" method="POST">
+    <h1>Login</h1>
+    {{ login_form.csrf_token }}
+    {{ render_field(login_form.email) }}
+    {{ render_field(login_form.password) }}
+    <button>Login</button>
+</form>
+{% endblock %}
