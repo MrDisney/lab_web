@@ -139,7 +139,7 @@ def update_category(id):
 
         db.session.add(category)
         db.session.commit()
-        flash('Категорія відредагована')
+        flash('Категорія відредагвана')
         return redirect(url_for('.category_crud'))
 
     form.name.data = category.name
