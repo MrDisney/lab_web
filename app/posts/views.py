@@ -108,12 +108,6 @@ def update_post(id):
     return render_template('create.html', form=form)
 
 
-@post_blueprint.route('/category', methods=['GET', 'POST'])
-def get_category():
-    category = Category.query.all()
-    return render_template('category.html', category=category)
-
-
 @post_blueprint.route('/category/<pk>', methods=['GET', 'POST'])
 def view_category_post(pk):
     all_posts = Post.query.filter_by(category_id=pk)
