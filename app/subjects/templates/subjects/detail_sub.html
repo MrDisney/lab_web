@@ -1,0 +1,45 @@
+{% from "_render_field.html" import render_field %}
+{% extends 'main.html' %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style2.css') }}">
+<div class="block__detail">
+    <div class="wrapper__content">
+        <p>Subject: {{ subject.name_subject }}</p>
+        <p>Teacher: {{ subject.teacher }}</p>
+        <p>Control: {{ subject.control.value }}</p>
+        <p>Specialty: {{ subject.specialty }}</p>
+        <p>Semester: {{ subject.semester }}</p>
+        <p>Type occupation: {{ subject.type_occupation.value }}</p>
+        <p>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Delete
+            </button>
+            <a href="{{ url_for('sub.update', id=subject.id) }}">
+                <button class="btn btn-primary" type="submit">Update</button>
+            </a>
+        </p>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                You want delete ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="{{ url_for('sub.delete', id=subject.id) }}" method="POST">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

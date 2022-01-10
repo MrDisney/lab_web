@@ -1,0 +1,38 @@
+{% from "_render_field.html" import render_field %}
+{% extends 'main.html' %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style2.css') }}">
+<div class="wrapper__create">
+    <div class="create__form">
+        <form method="POST">
+            {{ form.csrf_token }}
+            <div class="row mb-3">
+                <div class="col-sm-10">
+                    {{ render_field(form.name_subject, class='form-control') }}
+                </div>
+                <div class="col-sm-10">
+                    {{ render_field(form.teacher, class='form-control') }}
+                </div>
+                <div class="col-sm-10">
+                    {{ render_field(form.specialty, class='form-control') }}
+                </div>
+                <div class="col-sm-10">
+                    {{ render_field(form.semester, class='form-control') }}
+                </div>
+                <div class="col-sm-10">
+                    {{ render_field(form.type_occupation, class='form-control') }}
+                </div>
+                <div class="col-sm-10">
+                    {{ render_field(form.control, class='form-control') }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10 offset-sm-2">
+                    {{ render_field(form.submit, class="btn btn-primary", value="Update") }}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

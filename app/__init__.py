@@ -35,8 +35,14 @@ def create_app(config_name='default'):
         from .posts import post_blueprint
         app.register_blueprint(post_blueprint, url_prefix='/post')
 
+        from .subjects import sub_blueprint
+        app.register_blueprint(sub_blueprint, url_prefix='/subject')
+
         from .api import api_blueprint
         app.register_blueprint(api_blueprint, url_prefix='/api')
+
+        from .exm import api_exz_blueprint
+        app.register_blueprint(api_exz_blueprint, url_prefix='/api/pavlyshyn')
 
         return app
 
